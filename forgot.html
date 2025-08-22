@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forgot Password | Kalakriti</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        /* A simple CSS reset for consistent styling */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f5f5f5;
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        /* Container for the main card */
+        .container {
+            background-color: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            padding: 40px;
+            width: 100%;
+            max-width: 450px;
+            text-align: center;
+        }
+
+        /* Logo/Header styling */
+        .logo {
+            font-size: 2.5rem;
+            font-weight: 600;
+            color: #a0522d;
+            margin-bottom: 30px;
+        }
+
+        h2 {
+            font-size: 1.5rem;
+            margin-bottom: 25px;
+            color: #555;
+            font-weight: 400;
+        }
+
+        /* Form styling */
+        .form-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        label {
+            display: block;
+            font-weight: 500;
+            margin-bottom: 8px;
+            color: #444;
+        }
+
+        input[type="email"],
+        input[type="password"],
+        input[type="text"] {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+
+        input:focus {
+            border-color: #a0522d;
+            box-shadow: 0 0 0 3px rgba(160, 82, 45, 0.2);
+            outline: none;
+        }
+
+        /* Button styling */
+        .btn {
+            width: 100%;
+            padding: 14px;
+            background-color: #a0522d;
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .btn:hover {
+            background-color: #8c4728;
+        }
+
+        .btn:active {
+            transform: translateY(1px);
+        }
+
+        /* Message box styling */
+        .message-box {
+            margin-top: 15px;
+            padding: 10px;
+            border-radius: 8px;
+            text-align: center;
+            display: none;
+        }
+
+        .message-box.success {
+            background-color: #d4edda;
+            color: #155724;
+        }
+
+        .message-box.error {
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+        
+        /* Links styling */
+        .back-link {
+            display: block;
+            margin-top: 25px;
+            font-size: 0.9rem;
+            color: #a0522d;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .back-link:hover {
+            color: #555;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1 class="logo">Kalakriti</h1>
+        <h2>Forgot Password</h2>
+        <p id="message-box" class="message-box"></p>
+
+        <!-- Step 1: Request Email -->
+        <div id="email-step">
+            <p>Enter the email address associated with your account.</p>
+            <form id="emailForm">
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" name="email" required placeholder="Enter your email">
+                </div>
+                <button type="submit" class="btn">Send OTP</button>
+            </form>
+        </div>
+
+        <!-- Step 2: Verify OTP and Reset Password -->
+        <div id="otp-step" style="display:none;">
+            <p>An OTP has been sent to your email. Please enter it below.</p>
+            <form id="otpForm">
+                <div class="form-group">
+                    <label for="otp">One-Time Password (OTP)</label>
+                    <input type="text" id="otp" name="otp" required placeholder="Enter OTP">
+                </div>
+                <div class="form-group">
+                    <label for="new-password">New Password</label>
+                    <input type="password" id="new-password" name="new-password" required placeholder="Create a new password">
+                </div>
+                <button type="submit" class="btn">Reset Password</button>
+            </form>
+        </div>
+
+        <a href="login.html" class="back-link">Back to Login</a>
+    </div>
+
+    <script>
+        document.getElementById('emailForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const email = document.getElementById('email').value;
+            const messageBox = document.getElementById('message-box');
+            messageBox.style.display = 'block';
+            
+            // Simulating a backend call to send an OTP
+            // In a real application, you'd use a fetch() call to a backend endpoint.
+            // Example fetch:
+            /*
+            fetch('/api/send-otp', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ email: email })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    messageBox.className = 'message-box success';
+                    messageBox.textContent = 'OTP sent! Please check your email.';
+                    document.getElementById('email-step').style.display = 'none';
+                    document.getElementById('otp-step').style.display = 'block';
+                } else {
+                    messageBox.className = 'message-box error';
+                    messageBox.textContent = data.message;
+                }
+            })
+            .catch(error => {
+                messageBox.className = 'message-box error';
+                messageBox.textContent = 'An error occurred. Please try again later.';
+            });
+            */
+            
+            // For now, we'll just simulate a success message and show the next step.
+            messageBox.className = 'message-box success';
+            messageBox.textContent = 'OTP sent! Please check your email.';
+            setTimeout(() => {
+                document.getElementById('email-step').style.display = 'none';
+                document.getElementById('otp-step').style.display = 'block';
+            }, 1000);
+        });
+
+        document.getElementById('otpForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const otp = document.getElementById('otp').value;
+            const newPassword = document.getElementById('new-password').value;
+            const messageBox = document.getElementById('message-box');
+            messageBox.style.display = 'block';
+
+            // Simulating a backend call to verify OTP and reset password
+            // Example fetch:
+            /*
+            fetch('/api/reset-password', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ otp: otp, new_password: newPassword })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    messageBox.className = 'message-box success';
+                    messageBox.textContent = 'Password has been reset successfully! Redirecting...';
+                    // Redirect to login page after a delay
+                    setTimeout(() => { window.location.href = 'login.html'; }, 2000);
+                } else {
+                    messageBox.className = 'message-box error';
+                    messageBox.textContent = data.message;
+                }
+            })
+            .catch(error => {
+                messageBox.className = 'message-box error';
+                messageBox.textContent = 'An error occurred. Please try again later.';
+            });
+            */
+            
+            // For now, we'll just simulate a success message and redirection.
+            messageBox.className = 'message-box success';
+            messageBox.textContent = 'Password has been reset successfully! Redirecting to login...';
+            setTimeout(() => {
+                window.location.href = 'login.html';
+            }, 2000);
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Sacred Horse of Pithora | Kalakriti</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        .profile-icon {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+    <header class="main-header">
+        <div class="logo">Kalakriti</div>
+        <nav class="main-nav">
+            <ul>
+                <li><a href="#">Discover Art</a></li>
+                <li><a href="#">Marketplace</a></li>
+                <li><a href="#">Learn</a></li>
+                <li><a href="login.html" id="login-link">Login</a></li>
+                <!-- NEW: Profile icon placeholder -->
+                <li><a href="#" id="profile-link" class="profile-icon">Profile</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="product-container">
+        <section class="product-image-gallery">
+            <img src="https://via.placeholder.com/600x800.png?text=Pithora+Painting+of+Horse" alt="The Sacred Horse of Pithora" class="main-image">
+            <div class="thumbnail-gallery">
+                <img src="https://via.placeholder.com/150x200?text=Thumbnail+1" alt="Thumbnail view 1" class="thumbnail">
+                <img src="https://via.placeholder.com/150x200?text=Thumbnail+2" alt="Thumbnail view 2" class="thumbnail">
+            </div>
+        </section>
+
+        <section class="product-details-panel">
+            <h1 class="product-title">The Sacred Horse of Pithora</h1>
+            <p class="artist-name">By Rakesh Bhil</p>
+            <p class="product-price">₹12,500</p>
+            
+            <div class="product-actions">
+                <button class="add-to-cart-btn">Add to Cart</button>
+                <button class="buy-now-btn">Buy Now</button>
+            </div>
+
+            <div class="product-info-tabs">
+                <button class="tab-button active" onclick="showTab('description')">Description</button>
+                <button class="tab-button" onclick="showTab('shipping')">Shipping & Returns</button>
+            </div>
+            
+            <div id="description" class="tab-content active">
+                <p>This Pithora painting depicts the sacred horse, a key figure in the rituals of the Bhil tribe. The horse is believed to carry the spirits of the ancestors. Painted using natural vegetable dyes on a hand-prepared canvas, this piece is a beautiful example of ritualistic art.</p>
+                <ul>
+                    <li>Dimensions: 18" x 24"</li>
+                    <li>Material: Acrylic on canvas</li>
+                    <li>Origin: Gujarat, India</li>
+                </ul>
+            </div>
+            
+            <div id="shipping" class="tab-content">
+                <p>Ships from Gujarat, India. Estimated delivery in 7-10 business days. Returns are accepted within 14 days of delivery.</p>
+            </div>
+        </section>
+    </main>
+    <script src="script.js"></script>
+    <!-- Placeholder script for dynamic header content. A real application would use a more robust session management system. -->
+    <script>
+        function showTab(tabId) {
+            const tabs = document.querySelectorAll('.tab-content');
+            tabs.forEach(tab => {
+                tab.classList.remove('active');
+            });
+            const buttons = document.querySelectorAll('.tab-button');
+            buttons.forEach(button => {
+                button.classList.remove('active');
+            });
+            document.getElementById(tabId).classList.add('active');
+            event.currentTarget.classList.add('active');
+        }
+    </script>
+</body>
+</html>
